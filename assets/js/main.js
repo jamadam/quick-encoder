@@ -14,9 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.result dt').forEach(function(dt){
         var dd = dt.nextElementSibling;
         dt.querySelector('span').addEventListener('click', function(e) {
+            if (dd.textContent.length > 0) {
             settingInputString.textContent = dd.textContent;
             triggerEvent(settingInputString, 'change');
-            return false;
+            }
         });
     });
     
