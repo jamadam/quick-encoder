@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var dd = dt.nextElementSibling;
         dt.querySelector('span').addEventListener('click', function(e) {
             if (dd.textContent.length > 0) {
-            settingInputString.textContent = dd.textContent;
-            triggerEvent(settingInputString, 'change');
+                settingInputString.textContent = dd.textContent;
+                triggerEvent(settingInputString, 'change');
             }
         });
     });
@@ -43,6 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
         crypt3(input);
         epochToDate(input);
         dateToEpoch(input);
+        text2hex(input);
+        hex2text(input);
     };
     settingInputString.addEventListener('change', handle);
     settingInputString.addEventListener('keyup', handle);
@@ -245,6 +247,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         return out;
+    }
+    
+    function text2hex(a) {
+        var hoge = Array.from((new TextEncoder('utf-8')).encode(a));
+        var hex = hoge.map(x => x.toString(16)).join('');
+        document.querySelector('#result-text2hex').textContent = hex;
+    }
+    
+    function hex2text(a) {
+        var array = a.match(/.{1,2}/g) || [];
+        array = array.map(x => parseInt(x, 16));
+        var text = (new TextDecoder('utf-8')).decode(new Uint8Array(array));
+        document.querySelector('#result-hex2text').textContent = text;
     }
     
     Date.prototype.iso8601 = function() {
