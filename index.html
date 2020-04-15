@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>Quick Encoder</title>
+<script type="text/javascript" src="./assets/js/main.js"></script>
+<script type="text/javascript" src="./assets/js/ecl.js"></script>
+<script type="text/javascript" src="./assets/js/punycode.js"></script>
+<script type="text/javascript" src="./assets/js/CybozuLabs.js"></script>
+<script type="text/javascript" src="./assets/js/base64.js"></script>
+<script type="text/javascript" src="./assets/js/javacrypt.js"></script>
+<link rel="stylesheet" href="./assets/css/index.css" type="text/css">
+
+<header>
+    <h1>
+        <a href="./">Quick Encoder</a>
+    </h1>
+</header>
+
+<main>
+    <div id="presets">
+        <span class="currentTimestamp">Current Timestamp</span>
+    </div>
+    <dl>
+        <dt>Input String</dt>
+        <dd contenteditable="true" id="input"></dd>
+    </dl>
+    <dl class="result">
+        <dt>URL Encode(UTF-8)<span>FW</span></dt>
+        <dd contenteditable="true" id="result-url-encode-utf8"></dd>
+        <dt>URL Encode(UNICODE)<span>FW</span></dt>
+        <dd contenteditable="true" id="result-url-encode-unicode"></dd>
+        <dt>URL Encode(SJIS)<span>FW</span></dt>
+        <dd contenteditable="true" id="result-url-encode-sjis"></dd>
+        <dt>URL Encode(EUC-JP)<span>FW</span></dt>
+        <dd contenteditable="true" id="result-url-encode-eucjp"></dd>
+        <dt>URL Encode(JIS7)<span>FW</span></dt>
+        <dd contenteditable="true" id="result-url-encode-jis7"></dd>
+        <dt>URL Encode(JIS8)<span>FW</span></dt>
+        <dd contenteditable="true" id="result-url-encode-jis8"></dd>
+        <dt>URL Decode<span>FW</span></dt>
+        <dd contenteditable="true" id="result-url-decode"></dd>
+        <dt>HTML Escape<span>FW</span></dt>
+        <dd contenteditable="true" id="result-html-escape"></dd>
+        <dt>HTML Unescape<span>FW</span></dt>
+        <dd contenteditable="true" id="result-html-unescape"></dd>
+        <dt>MD5<span>FW</span></dt>
+        <dd contenteditable="true" id="result-md5"></dd>
+        <dt>SHA1<span>FW</span></dt>
+        <dd contenteditable="true" id="result-sha1"></dd>
+        <dt>Punycode Encode<span>FW</span></dt>
+        <dd contenteditable="true" id="result-punycode-encode"></dd>
+        <dt>Punycode Decode<span>FW</span></dt>
+        <dd contenteditable="true" id="result-punycode-decode"></dd>
+        <dt>Base64 Encode<span>FW</span></dt>
+        <dd contenteditable="true" id="result-base64-encode"></dd>
+        <dt>Base64 Decode<span>FW</span></dt>
+        <dd contenteditable="true" id="result-base64-decode"></dd>
+        <dt>crypt(3)<span>FW</span></dt>
+        <dd contenteditable="true" id="result-crypt3"></dd>
+        <dt>ISO8601<span>FW</span></dt>
+        <dd contenteditable="true" id="result-unix2iso8601"></dd>
+        <dt>Unix Timestamp<span>FW</span></dt>
+        <dd contenteditable="true" id="result-iso86012unix"></dd>
+    </dl>
+</main>
