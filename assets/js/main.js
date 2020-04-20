@@ -15,14 +15,14 @@ document.addEventListener('DOMContentLoaded', function() {
         var dd = dt.nextElementSibling;
         dt.querySelector('span').addEventListener('click', function(e) {
             if (dd.textContent.length > 0) {
-                settingInputString.textContent = dd.textContent;
+                settingInputString.innerHTML = dd.innerHTML;
                 triggerEvent(settingInputString, 'change');
             }
         });
     });
     
     var handle = function() {
-        var input = this.textContent;
+        var input = contentEditableTextContent(this);
         urlencodeUTF8(input);
         urlencodeUnicode(input);
         urlencodeEUCJP(input);
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function crypt3(input) {
         var crypt = new Crypt();
         var str = (crypt.crypt(generateSalt(), input))[0];
-        document.querySelector('#result-crypt3').textContent = str;
+        document.querySelector('#result-crypt3').innerText = str;
     }
     
     function htmlEscape(input) {
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         str = str.replace(/&/g, '&amp;');
         str = str.replace(/</g, '&lt;');
         str = str.replace(/>/g, '&gt;');
-        document.querySelector('#result-html-escape').textContent = str;
+        document.querySelector('#result-html-escape').innerText = str;
     }
     
     function htmlUnescape(input) {
@@ -79,37 +79,37 @@ document.addEventListener('DOMContentLoaded', function() {
         str = str.replace(/&gt;/g, '>');
         str = str.replace(/&lt;/g, '<');
         str = str.replace(/&amp;/g, '&');
-        document.querySelector('#result-html-unescape').textContent = str;
+        document.querySelector('#result-html-unescape').innerText = str;
     }
     
     function urlencodeUTF8(input) {
         var str = EscapeUTF8(input);
-        document.querySelector('#result-url-encode-utf8').textContent = str;
+        document.querySelector('#result-url-encode-utf8').innerText = str;
     }
     
     function urlencodeSJIS(input) {
         var str = EscapeSJIS(input);
-        document.querySelector('#result-url-encode-sjis').textContent = str;
+        document.querySelector('#result-url-encode-sjis').innerText = str;
     }
     
     function urlencodeEUCJP(input) {
         var str = EscapeEUCJP(input);
-        document.querySelector('#result-url-encode-eucjp').textContent = str;
+        document.querySelector('#result-url-encode-eucjp').innerText = str;
     }
     
     function urlencodeJIS7(input) {
         var str = EscapeJIS7(input);
-        document.querySelector('#result-url-encode-jis7').textContent = str;
+        document.querySelector('#result-url-encode-jis7').innerText = str;
     }
     
     function urlencodeJIS8(input) {
         var str = EscapeJIS8(input);
-        document.querySelector('#result-url-encode-jis8').textContent = str;
+        document.querySelector('#result-url-encode-jis8').innerText = str;
     }
     
     function urlencodeUnicode(input) {
         var str = EscapeUnicode(input);
-        document.querySelector('#result-url-encode-unicode').textContent = str;
+        document.querySelector('#result-url-encode-unicode').innerText = str;
     }
     
     function urldecode(input) {
@@ -117,14 +117,14 @@ document.addEventListener('DOMContentLoaded', function() {
             return window["Unescape"+GetEscapeCodeType(str)](str);
         };
         var str = UnescapeAutoDetect(input);
-        document.querySelector('#result-url-decode').textContent = str;
+        document.querySelector('#result-url-decode').innerText = str;
     }
     
     function base64_encode(input) {
         var dom = document.querySelector('#result-base64-encode');
         try {
             var str = Base64.encode(input);
-            dom.textContent = str;
+            dom.innerText = str;
             dom.classList.remove('error');
         } catch (e) {
             dom.classList.add('error');
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var dom = document.querySelector('#result-base64-decode');
         try {
             var str = Base64.decode(input);
-            dom.textContent = str;
+            dom.innerText = str;
             dom.classList.remove('error');
         } catch (e) {
             dom.classList.add('error');
@@ -143,12 +143,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     function sha1_encode(input) {
         var str = CybozuLabs.SHA1.calc(utf16to8(input));
-        document.querySelector('#result-sha1').textContent = str;
+        document.querySelector('#result-sha1').innerText = str;
     }
     
     function md5_encode(input) {
         var str = CybozuLabs.MD5.calc(utf16to8(input));
-        document.querySelector('#result-md5').textContent = str;
+        document.querySelector('#result-md5').innerText = str;
     }
     
     function punycode_encode(input) {
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         var str = encodeIDN(input);
-        document.querySelector('#result-punycode-encode').textContent = str;
+        document.querySelector('#result-punycode-encode').innerText = str;
     }
     
     function punycode_decode(input) {
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         var str = decodeIDN(input);
-        document.querySelector('#result-punycode-decode').textContent = str;
+        document.querySelector('#result-punycode-decode').innerText = str;
     }
     
     function utf16to8(str) {
@@ -206,14 +206,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function text2hex(a) {
         var hoge = Array.from((new TextEncoder('utf-8')).encode(a));
         var hex = hoge.map(x => x.toString(16)).join('');
-        document.querySelector('#result-text2hex').textContent = hex;
+        document.querySelector('#result-text2hex').innerText = hex;
     }
     
     function hex2text(a) {
         var array = a.match(/.{1,2}/g) || [];
         array = array.map(x => parseInt(x, 16));
         var text = (new TextDecoder('utf-8')).decode(new Uint8Array(array));
-        document.querySelector('#result-hex2text').textContent = text;
+        document.querySelector('#result-hex2text').innerText = text;
     }
     
     Date.prototype.iso8601 = function() {
@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var a;
         if (isValidDate(d)) {
             a = Math.round(d.getTime() / 1000);
-            dom.textContent = a;
+            dom.innerText = a;
             dom.classList.remove('error');
         } else {
             input = input.replace(/([\-+]\d\d):(\d\d)/, '$1$2');
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
             d = new Date(input);
             if (isValidDate(d)) {
                 a = Math.round(d.getTime() / 1000);
-                dom.textContent = a;
+                dom.innerText = a;
                 dom.classList.remove('error');
             } else {
                 input = input.replace(/(\d+)\-(\d+)\-(\d+)/, '$1/$2/$3');
@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 d = new Date(input);
                 if (isValidDate(d)) {
                     a = Math.round(d.getTime() / 1000);
-                    dom.textContent = a;
+                    dom.innerText = a;
                     dom.classList.remove('error');
                 } else {
                     dom.classList.add('error');
@@ -284,10 +284,25 @@ document.addEventListener('DOMContentLoaded', function() {
         var dom = document.querySelector('#result-unix2iso8601');
         var d = new Date(seed * 1000);
         if (isValidDate(d)) {
-            dom.textContent = d.iso8601();
+            dom.innerText = d.iso8601();
             dom.classList.remove('error');
         } else {
             dom.classList.add('error');
         }
+    }
+    
+    function contentEditableTextContent(el) {
+        if (el.textContent === '') {
+            return '';
+        }
+        var html = el.innerHTML;
+        return html.replace('<div><br></div>','\n')
+                    .replace(/<br><\/div>$/,'') // FF generates non-visible <br> inside last <div>
+                    .replace(/<br><\/div>/g,'\n')
+                    .replace(/<\/div><div>/g,'\n')
+                    .replace(/^<div>/,'')
+                    .replace(/<div>/g,'\n')
+                    .replace(/<\/div>/g,'')
+                    .replace(/<br>/g,'\n');
     }
 });
