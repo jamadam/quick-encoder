@@ -76,9 +76,7 @@ main {
       border-right:1px solid #ccc;
       background-color: #fff;
       &:focus {
-        min-height: 5em;
-        height: 3em;
-        z-index: 1000;
+        min-height: 3em;
       }
       &:hover,
       &:focus {
