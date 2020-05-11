@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.querySelectorAll("#presets .currentTimestamp")[0].addEventListener('click', function() {
         var a = new Date();
-        settingInputString.textContent = a.iso8601();
+        settingInputString.value = a.iso8601();
         triggerEvent(settingInputString, 'change');
     });
     
@@ -15,14 +15,15 @@ document.addEventListener('DOMContentLoaded', function() {
         var dd = dt.nextElementSibling;
         dt.querySelector('span').addEventListener('click', function(e) {
             if (dd.textContent.length > 0) {
-                settingInputString.innerHTML = dd.innerHTML;
+                settingInputString.value = dd.innerText;
                 triggerEvent(settingInputString, 'change');
             }
         });
     });
     
     var handle = function() {
-        var input = contentEditableTextContent(this);
+        autosize(this);
+        var input = this.value;
         urlencodeUTF8(input);
         urlencodeUnicode(input);
         urlencodeEUCJP(input);
@@ -289,20 +290,5 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             dom.classList.add('error');
         }
-    }
-    
-    function contentEditableTextContent(el) {
-        if (el.textContent === '') {
-            return '';
-        }
-        var html = el.innerHTML;
-        return html.replace('<div><br></div>','\n')
-                    .replace(/<br><\/div>$/,'') // FF generates non-visible <br> inside last <div>
-                    .replace(/<br><\/div>/g,'\n')
-                    .replace(/<\/div><div>/g,'\n')
-                    .replace(/^<div>/,'')
-                    .replace(/<div>/g,'\n')
-                    .replace(/<\/div>/g,'')
-                    .replace(/<br>/g,'\n');
     }
 });

@@ -34,13 +34,16 @@ main {
     flex-wrap: wrap;
     align-content: stretch;
     margin-bottom: 8px;
-    font-family: monospace;
+    textarea,
     dt,
     dd {
       border-top:1px solid #ccc;
       &:last-child {
         border-bottom:1px solid #ccc;
       }
+      font-size:1rem;
+      line-height:1rem;
+      font-family:monospace;
     }
     dt {
       width: 230px;
@@ -69,15 +72,13 @@ main {
         }
       }
     }
+    textarea,
     dd {
       width: calc(100% - 230px);
       padding: 0.5em 1em;
       border-left:1px solid #ccc;
       border-right:1px solid #ccc;
       background-color: #fff;
-      &:focus {
-        min-height: 3em;
-      }
       &:hover,
       &:focus {
         background-color: #fef0f0;
